@@ -6,11 +6,11 @@ body{background:#B0C4DE;}
 .header{background:#27408B;text-align:center;position:relative;overflow:visible}
 .header h4{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto}
 
-.menu-container {position: absolute;bottom:0.125rem;right:0;z-index: 1000;}
+.menu-container {position: absolute;bottom:0.125rem;left:0;z-index: 1000;}
 #menu-toggle {display: none;}
 .menu-icon {display: flex;flex-direction: column;gap: 4px;cursor: pointer;}
 .menu-icon span {width: 40px;height: 5px;background:#000000;border-radius: 0;}
-.dropdown-menu {position: absolute;right: 0;top: 1rem;background: #27408B;border-radius: 0;display: none;width: max-content;min-width:170px;overflow: visible;box-shadow: 5px -5px 5px #FFD700;}
+.dropdown-menu {position: absolute;left: 0;top: 1rem;background: #27408B;border-radius: 0;display: none;width: max-content;min-width:170px;overflow: visible;box-shadow: -3px -3px 5px #FFD700;}
 .dropdown-menu a {display: block;padding: 0.7rem 1rem;text-decoration: underline;white-space: nowrap;color:#000000;font-weight:bold;font-size:1rem;}
 .dropdown-menu a:hover {background: #CCCCCC;color: #27408B;}
 #menu-toggle:checked + .menu-icon + .dropdown-menu {display: block;}
