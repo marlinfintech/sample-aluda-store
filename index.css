@@ -34,6 +34,34 @@ body{background:#B0C4DE;}
 
 .orderbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #27408B, #00BFFF); color:#000000;padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
 
+.order-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* keep buttons aligned like your current design */
+.after-order {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.after-order.hidden {
+    display: none;
+}
+/* visual feedback */
+.added-btn {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #FFFFFF;          /* or inherit */
+    padding: 0;
+    margin: 0.5rem 0;
+    font-weight: bold;
+    cursor: default;
+}
+
 .viewbuttonsection{grid-column: span 2;align-items:center;background:#FFFFFF}
 .viewbutton{text-align:center ;border-radius: 0.25rem; background: linear-gradient(to bottom, #B0C4DE, #00BFFF); color:#000000;padding:0.5rem 1rem 0.5rem 1rem; text-decoration: none;margin:1rem auto;border:none;outline:none;font-size:1rem;font-weight:bold}
 

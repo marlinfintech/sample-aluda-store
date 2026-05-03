@@ -1,9 +1,6 @@
-
-
-
-
-
-
+// ===============================
+// VIEW MORE / SHOW LESS PRODUCTS
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   const cards = document.querySelectorAll(".categoryproductscard");
@@ -15,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!btn || products.length === 0) return;
 
-    // hide everything after 4
+    // Hide everything after 4
     products.forEach((product, i) => {
       if (i >= 4) product.classList.add("hidden");
     });
@@ -23,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let expanded = false;
 
     btn.addEventListener("click", () => {
-
       expanded = !expanded;
 
       products.forEach((product, i) => {
@@ -42,16 +38,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// ===============================
+// MENU TOGGLE BEHAVIOR
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
 
-
-
-document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.getElementById("menu-toggle");
   const menuContainer = document.querySelector(".menu-container");
   const menuLinks = document.querySelectorAll(".dropdown-menu a");
   const menuIcon = document.querySelector(".menu-icon");
 
-  // Stop click on icon from closing menu
+  // Prevent menu from closing when clicking icon
   menuIcon.addEventListener("click", e => e.stopPropagation());
 
   // Close menu when a link is clicked
@@ -63,7 +60,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Close menu when clicking outside
   document.addEventListener("click", (event) => {
-    // Only close if the click is outside and checkbox is open
     if (menuToggle.checked && !menuContainer.contains(event.target)) {
-      // Use a small delay to avoid conflict with checkbox toggle
-      setTimeout(() => menuToggle.checked = false, 10);}});});
+      setTimeout(() => {
+        menuToggle.checked = false;
+      }, 10);
+    }
+  });
+
+});
+
+
+// ===============================
+// ORDER BUTTON TOGGLE SYSTEM
+// ===============================
+document.addEventListener("click", (e) => {
+
+  // ORDER CLICK
+  if (e.target.classList.contains("order-btn")) {
+    const section = e.target.closest(".order-section");
+
+    section.querySelector(".order-btn").classList.add("hidden");
+    section.querySelector(".after-order").classList.remove("hidden");
+  }
+
+  // CANCEL CLICK
+  if (e.target.classList.contains("cancel-btn")) {
+    const section = e.target.closest(".order-section");
+
+    section.querySelector(".after-order").classList.add("hidden");
+    section.querySelector(".order-btn").classList.remove("hidden");
+  }
+
+});
