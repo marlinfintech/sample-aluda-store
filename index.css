@@ -60,7 +60,7 @@ body{background:#B0C4DE;}
     background: none;
     border: none;
     box-shadow: none;
-    color: #FFFFFF;          /* or inherit */
+    color: #008B00;          /* or inherit */
     padding: 0;
     margin: 0.5rem 0;
     cursor: default;
@@ -112,6 +112,38 @@ footer{background:#B0C4DE);text-align:center; color:#FF8C00;padding-bottom:3rem;
 .bottombar {position: fixed;bottom: 0;left: 0;width: 100%;height: 3rem;background: #FFD700;display: flex;justify-content: space-around;align-items: center;z-index: 1000;}
 
 .bottombar button {text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #27408B, #00BFFF); color:#000000;padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold}
+
+.bottombar .checkoutbutton{color: #FFFFFF}
+
+
+.cartpanel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: white;
+  border-left: 2px solid #27408B;
+  padding: 1rem;
+  overflow-y: auto;
+  z-index: 2000;
+}
+
+.cartpanel.hidden {
+  display: none;
+}
+
+.cartitem {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.qtycontrols {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
 @media(min-width:1000px){.categoryproductscard{ grid-template-columns:repeat(4,1fr);}}
 

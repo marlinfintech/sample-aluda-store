@@ -56,7 +56,7 @@ We sell high quality Electrical and Electronics Supplies at discounted prices.
 <p>Price</p>
 </div>
 <div class="productimageandbutton">
-<div class="productimage" data-ITEM-ID="cable1">
+<div class="productimage" data-item_code="cable1">
 <img src="assets/cables&cabling/cable1.jpg">
 </div>
 
@@ -81,7 +81,7 @@ We sell high quality Electrical and Electronics Supplies at discounted prices.
 <p>Price</p>
 </div>
 <div class="productimageandbutton">
-<div class="productimage" data-ITEM-ID="cable2">
+<div class="productimage" data-item_code="cable2">
 <img src="assets/cables&cabling/cable2.jpg">
 </div>
 <div class="placeorder">
@@ -105,7 +105,7 @@ We sell high quality Electrical and Electronics Supplies at discounted prices.
 <p>Price</p>
 </div>
 <div class="productimageandbutton">
-<div class="productimage" data-ITEM-ID="cable3">
+<div class="productimage" data-item_code="cable3">
 <img src="assets/cables&cabling/cable3.jpg">
 </div>
 <div class="placeorder">
@@ -129,7 +129,7 @@ We sell high quality Electrical and Electronics Supplies at discounted prices.
 <p>Price</p>
 </div>
 <div class="productimageandbutton">
-<div class="productimage" data-ITEM-ID="connectors1">
+<div class="productimage" data-item_code="connectors1">
 <img src="assets/cables&cabling/connectors1.jpg">
 </div>
 <div class="placeorder">
@@ -153,7 +153,7 @@ We sell high quality Electrical and Electronics Supplies at discounted prices.
 <p>Price</p>
 </div>
 <div class="productimageandbutton">
-<div class="productimage" data-ITEM-ID="connectors2">
+<div class="productimage" data-item_code="connectors2">
 <img src="assets/cables&cabling/connectors2.jpg">
 </div>
 <div class="placeorder">
@@ -177,7 +177,7 @@ We sell high quality Electrical and Electronics Supplies at discounted prices.
 <p>Price</p>
 </div>
 <div class="productimageandbutton">
-<div class="productimage" data-ITEM-ID="connectors3">
+<div class="productimage" data-item_code="connectors3">
 <img src="assets/cables&cabling/connectors3.jpg">
 </div>
 <div class="placeorder">
@@ -231,8 +231,30 @@ loading="lazy">
 <div class="gridcontainer">
 <div class="bottombar">
 <button>Whatsapp</button>
-<button>Check-out Cart</button>
+<button class="checkoutbutton">Check-out Cart</button>
 </div>
+</div>
+
+
+<!-- ===============================
+CART PANEL (ADD THIS)
+=============================== -->
+<div class="cartpanel hidden" id="cartPanel">
+
+  <h3>Cart</h3>
+
+  <div id="cartItems"></div>
+
+  <hr>
+
+  <div class="carttotal">
+    Total: <span id="cartTotal">0</span>
+  </div>
+
+  <button id="cartCheckoutBtn" class="checkoutbutton">
+    Checkout
+  </button>
+
 </div>
 
 </div>

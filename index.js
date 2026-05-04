@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!btn || products.length === 0) return;
 
-    // Hide everything after 4
     products.forEach((product, i) => {
       if (i >= 4) product.classList.add("hidden");
     });
@@ -28,9 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      btn.textContent = expanded
-        ? "Show Less"
-        : "View More Products";
+      btn.textContent = expanded ? "Show Less" : "View More Products";
     });
 
   });
@@ -48,17 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuLinks = document.querySelectorAll(".dropdown-menu a");
   const menuIcon = document.querySelector(".menu-icon");
 
-  // Prevent menu from closing when clicking icon
   menuIcon.addEventListener("click", e => e.stopPropagation());
 
-  // Close menu when a link is clicked
   menuLinks.forEach(link => {
     link.addEventListener("click", () => {
       menuToggle.checked = false;
     });
   });
 
-  // Close menu when clicking outside
   document.addEventListener("click", (event) => {
     if (menuToggle.checked && !menuContainer.contains(event.target)) {
       setTimeout(() => {
@@ -70,43 +64,43 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// ===============================
+// ORDER BUTTON TOGGLE SYSTEM (KEPT SIMPLE & STABLE)
+// placeorder ↔ orderplaced ONLY
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".productcard").forEach(card => {
 
-    const container = card.querySelector(".placeorder");
-
     const orderBtn = card.querySelector(".orderbutton");
     const cancelBtn = card.querySelector(".cancelbutton");
 
-    const stockLabel = card.querySelector(".instocklabel");
-
+    const orderSection = card.querySelector(".ordersection");
     const orderPlaced = card.querySelector(".orderplaced");
 
-    const orderSection = card.querySelector(".ordersection");
+    const stockLabel = card.querySelector(".instocklabel");
 
-    // ORDER CLICK → SWITCH STATE
     orderBtn.addEventListener("click", () => {
-
-      container.classList.remove("placeorder");
-      container.classList.add("orderplaced");
 
       orderSection.style.display = "none";
       orderPlaced.style.display = "flex";
 
+      // hide stock when added to cart
+      if (stockLabel) {
+        stockLabel.style.display = "none";
+      }
+
     });
 
-    // CANCEL CLICK → REVERT STATE
     cancelBtn.addEventListener("click", () => {
-
-      container.classList.remove("orderplaced");
-      container.classList.add("placeorder");
-
-      stockLabel.textContent = "In Stock";
-      stockLabel.style.color = "black";
 
       orderSection.style.display = "flex";
       orderPlaced.style.display = "none";
+
+      // restore stock label
+      if (stockLabel) {
+        stockLabel.style.display = "block";
+      }
 
     });
 
@@ -114,3 +108,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
+// ===============================
+// INVENTORY LOADER + STOCK DISPLAY
+// ===============================
+document.addEventListener("DOMContentLoaded", async () => {
+
+  try {
+
+    const res = await fetch("http://localhost:3000/inventory");
+
+    if (!res.ok) {
+      console.error("Inventory API failed");
+      return;
+    }
+
+    const inventory = await res.json();
+
+    document.querySelectorAll(".productcard").forEach(card => {
+
+      const img = card.querySelector(".productimage");
+      const code = img?.dataset.item_code;
+
+      if (!code) return;
+
+      const product = inventory.find(p => p.item_code === code);
+
+      const stockLabel = card.querySelector(".instocklabel");
+      const orderBtn = card.querySelector(".orderbutton");
+
+      if (!product) return;
+
+      // OUT OF STOCK
+      if (product.stock_available <= 0) {
+
+        stockLabel.textContent = "Out of Stock";
+        stockLabel.style.color = "red";
+
+        orderBtn.disabled = true;
+        orderBtn.textContent = "Unavailable";
+        orderBtn.style.opacity = "0.5";
+
+      } 
+      // IN STOCK
+      else {
+
+        stockLabel.textContent = "In Stock";
+        stockLabel.style.color = "#000000";
+
+        orderBtn.disabled = false;
+        orderBtn.textContent = "Order";
+        orderBtn.style.opacity = "1";
+
+      }
+
+    });
+
+  } catch (err) {
+    console.error("Inventory load error:", err);
+  }
+
+});
