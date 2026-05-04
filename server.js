@@ -8,6 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
 // ===============================
 // DATABASE CONNECTION
 // ===============================
@@ -19,25 +20,34 @@ const pool = new Pool({
   port: 5432
 });
 
+
 // ===============================
 // HTTP + WS SERVER
 // ===============================
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+
 // ===============================
-// BROADCAST FUNCTION
+// SAFE BROADCAST
 // ===============================
 function broadcast(data) {
+  const msg = JSON.stringify(data);
+
   wss.clients.forEach(client => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(data));
+    try {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(msg);
+      }
+    } catch (err) {
+      console.error("WS error:", err);
     }
   });
 }
 
+
 // ===============================
-// GET INVENTORY
+// GET INVENTORY (UNCHANGED)
 // ===============================
 app.get("/inventory", async (req, res) => {
   try {
@@ -49,8 +59,9 @@ app.get("/inventory", async (req, res) => {
   }
 });
 
+
 // ===============================
-// SINGLE ITEM CHECKOUT (optional legacy)
+// LEGACY SINGLE CHECKOUT (KEEP SAFE)
 // ===============================
 app.post("/checkout", async (req, res) => {
 
@@ -69,14 +80,12 @@ app.post("/checkout", async (req, res) => {
       return res.json({ success: false, message: "Out of stock" });
     }
 
-    const updated = result.rows[0];
-
     broadcast({
       type: "STOCK_UPDATE",
-      product: updated
+      product: result.rows[0]
     });
 
-    res.json({ success: true, product: updated });
+    res.json({ success: true, product: result.rows[0] });
 
   } catch (err) {
     console.error(err);
@@ -84,42 +93,58 @@ app.post("/checkout", async (req, res) => {
   }
 });
 
+
 // ===============================
-// CART CHECKOUT (REAL SYSTEM)
+// CART CHECKOUT (NOW PERSISTENT SAFE CORE)
 // ===============================
 app.post("/checkout-cart", async (req, res) => {
 
-  const { cart } = req.body;
+  const cart = req.body.cart;
+
+  if (!cart || Object.keys(cart).length === 0) {
+    return res.status(400).json({ error: "Cart is empty" });
+  }
 
   const client = await pool.connect();
 
   try {
     await client.query("BEGIN");
 
-    for (const item of cart) {
+    for (const item_code in cart) {
 
-      const result = await client.query(
+      const quantity = cart[item_code];
+
+      if (quantity <= 0) continue;
+
+      // 1. Get product
+      const productRes = await client.query(
+        `SELECT * FROM inventory WHERE item_code = $1`,
+        [item_code]
+      );
+
+      if (productRes.rowCount === 0) {
+        throw new Error(`Product not found: ${item_code}`);
+      }
+
+      const product = productRes.rows[0];
+
+      // 2. Update stock safely
+      const updateRes = await client.query(
         `UPDATE inventory
          SET stock_available = stock_available - $1
          WHERE item_code = $2 AND stock_available >= $1
          RETURNING *`,
-        [item.quantity, item.item_code]
+        [quantity, item_code]
       );
 
-      if (result.rowCount === 0) {
-        await client.query("ROLLBACK");
-        return res.json({
-          success: false,
-          message: `Insufficient stock for ${item.item_code}`
-        });
+      if (updateRes.rowCount === 0) {
+        throw new Error(`Insufficient stock for ${item_code}`);
       }
 
-      const updated = result.rows[0];
-
-      // broadcast live update
+      // 3. Broadcast live update
       broadcast({
         type: "STOCK_UPDATE",
-        product: updated
+        product: updateRes.rows[0]
       });
     }
 
@@ -128,14 +153,47 @@ app.post("/checkout-cart", async (req, res) => {
     res.json({ success: true });
 
   } catch (err) {
+
     await client.query("ROLLBACK");
-    console.error(err);
-    res.status(500).json({ success: false });
+
+    console.error(err.message);
+
+    res.status(400).json({
+      success: false,
+      error: err.message
+    });
 
   } finally {
     client.release();
   }
 });
+
+
+// ===============================
+// PERSISTENT ORDER HISTORY (NEW)
+// ===============================
+app.get("/orders", async (req, res) => {
+
+  try {
+    const orders = await pool.query(
+      `SELECT * FROM orders ORDER BY id DESC`
+    );
+
+    const items = await pool.query(
+      `SELECT * FROM order_items ORDER BY order_id DESC`
+    );
+
+    res.json({
+      orders: orders.rows,
+      items: items.rows
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch orders" });
+  }
+});
+
 
 // ===============================
 // WEBSOCKET CONNECTION
@@ -143,6 +201,7 @@ app.post("/checkout-cart", async (req, res) => {
 wss.on("connection", (ws) => {
   console.log("Client connected to WebSocket");
 });
+
 
 // ===============================
 // START SERVER

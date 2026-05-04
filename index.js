@@ -1,11 +1,20 @@
 // ===============================
+// CART STATE (PERSISTENT)
+// ===============================
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+// save cart helper
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+
+// ===============================
 // VIEW MORE / SHOW LESS PRODUCTS
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
-  const cards = document.querySelectorAll(".categoryproductscard");
-
-  cards.forEach(card => {
+  document.querySelectorAll(".categoryproductscard").forEach(card => {
 
     const products = card.querySelectorAll(".productcard");
     const btn = card.parentElement.querySelector(".viewbutton");
@@ -19,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let expanded = false;
 
     btn.addEventListener("click", () => {
+
       expanded = !expanded;
 
       products.forEach((product, i) => {
@@ -45,6 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuLinks = document.querySelectorAll(".dropdown-menu a");
   const menuIcon = document.querySelector(".menu-icon");
 
+  if (!menuToggle || !menuContainer || !menuIcon) return;
+
   menuIcon.addEventListener("click", e => e.stopPropagation());
 
   menuLinks.forEach(link => {
@@ -55,9 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (event) => {
     if (menuToggle.checked && !menuContainer.contains(event.target)) {
-      setTimeout(() => {
-        menuToggle.checked = false;
-      }, 10);
+      setTimeout(() => menuToggle.checked = false, 10);
     }
   });
 
@@ -65,8 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
-// ORDER BUTTON TOGGLE SYSTEM (KEPT SIMPLE & STABLE)
-// placeorder ↔ orderplaced ONLY
+// CART + ORDER SYSTEM (FIXED UI RULE)
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -79,20 +88,48 @@ document.addEventListener("DOMContentLoaded", () => {
     const orderPlaced = card.querySelector(".orderplaced");
 
     const stockLabel = card.querySelector(".instocklabel");
+    const code = card.querySelector(".productimage")?.dataset.item_code;
 
+    if (!orderBtn || !cancelBtn || !code) return;
+
+    // ensure correct UI on reload
+    if (cart[code]) {
+      orderSection.style.display = "none";
+      orderPlaced.style.display = "flex";
+      if (stockLabel) stockLabel.style.display = "none";
+    }
+
+    // =========================
+    // ADD TO CART
+    // =========================
     orderBtn.addEventListener("click", () => {
+
+      cart[code] = (cart[code] || 0) + 1;
+      saveCart();
+      updateCartUI();
 
       orderSection.style.display = "none";
       orderPlaced.style.display = "flex";
 
-      // hide stock when added to cart
+      // ✅ FIX: hide stock label completely (this removes your issue)
       if (stockLabel) {
         stockLabel.style.display = "none";
       }
 
     });
 
+    // =========================
+    // REMOVE FROM CART
+    // =========================
     cancelBtn.addEventListener("click", () => {
+
+      if (cart[code]) {
+        cart[code]--;
+        if (cart[code] <= 0) delete cart[code];
+      }
+
+      saveCart();
+      updateCartUI();
 
       orderSection.style.display = "flex";
       orderPlaced.style.display = "none";
@@ -110,18 +147,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
-// INVENTORY LOADER + STOCK DISPLAY
+// CART UI COUNTER
+// ===============================
+function updateCartUI() {
+
+  const total = Object.values(cart).reduce((a, b) => a + b, 0);
+
+  let badge = document.getElementById("cart-count");
+
+  const checkoutBtn = document.querySelector(".checkoutbutton");
+  if (!checkoutBtn) return;
+
+  if (!badge) {
+    badge = document.createElement("span");
+    badge.id = "cart-count";
+    badge.style.marginLeft = "6px";
+    badge.style.fontWeight = "bold";
+    checkoutBtn.appendChild(badge);
+  }
+
+  badge.textContent = total;
+}
+
+
+// initial render
+updateCartUI();
+
+
+// ===============================
+// INVENTORY LOADER
 // ===============================
 document.addEventListener("DOMContentLoaded", async () => {
 
   try {
 
     const res = await fetch("http://localhost:3000/inventory");
-
-    if (!res.ok) {
-      console.error("Inventory API failed");
-      return;
-    }
+    if (!res.ok) return;
 
     const inventory = await res.json();
 
@@ -139,7 +200,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (!product) return;
 
-      // OUT OF STOCK
       if (product.stock_available <= 0) {
 
         stockLabel.textContent = "Out of Stock";
@@ -149,9 +209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         orderBtn.textContent = "Unavailable";
         orderBtn.style.opacity = "0.5";
 
-      } 
-      // IN STOCK
-      else {
+      } else {
 
         stockLabel.textContent = "In Stock";
         stockLabel.style.color = "#000000";
@@ -167,5 +225,53 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     console.error("Inventory load error:", err);
   }
+
+});
+
+
+// ===============================
+// CHECKOUT (DB + CLEAR CART)
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+
+  const checkoutBtn = document.querySelector(".checkoutbutton");
+  if (!checkoutBtn) return;
+
+  checkoutBtn.addEventListener("click", async () => {
+
+    if (Object.keys(cart).length === 0) {
+      alert("Cart is empty");
+      return;
+    }
+
+    try {
+
+      const res = await fetch("http://localhost:3000/checkout-cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart })
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        alert(data.error || "Checkout failed");
+        return;
+      }
+
+      alert("Order placed successfully!");
+
+      cart = {};
+      saveCart();
+      updateCartUI();
+
+      window.location.href = "checkout.html";
+
+    } catch (err) {
+      console.error(err);
+      alert("Checkout failed");
+    }
+
+  });
 
 });

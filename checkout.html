@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checkout</title>
+
+<link rel="stylesheet" href="index.css">
+
+<style>
+  body {
+    font-family: serif;
+    background: #B0C4DE;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-top: 1rem;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    text-align: center;
+  }
+
+  th {
+    background: #27408B;
+    color: white;
+  }
+
+  .removeBtn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+
+  .summary {
+    margin-top: 1rem;
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn {
+    padding: 0.6rem 1rem;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .back {
+    background: #ccc;
+  }
+
+  .confirm {
+    background: #00BFFF;
+  }
+
+</style>
+</head>
+
+<body>
+
+<h2>Your Checkout</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Subtotal</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody id="cartTable"></tbody>
+</table>
+
+<div class="summary" id="totalBox">Total: 0</div>
+
+<div class="actions">
+  <button class="btn back" onclick="goBack()">Back</button>
+  <button class="btn confirm" onclick="confirmOrder()">Confirm Purchase</button>
+</div>
+
+
+<script>
+let cart = {};
+let inventory = [];
+
+
+// ===============================
+// LOAD DATA
+// ===============================
+async function loadData() {
+
+  const invRes = await fetch("http://localhost:3000/inventory");
+  inventory = await invRes.json();
+
+  const orderRes = await fetch("http://localhost:3000/last-order");
+  const data = await orderRes.json();
+
+  cart = data.order || {};
+
+  renderCart();
+}
+
+
+// ===============================
+// RENDER TABLE
+// ===============================
+function renderCart() {
+
+  const table = document.getElementById("cartTable");
+  table.innerHTML = "";
+
+  let total = 0;
+
+  for (let code in cart) {
+
+    const qty = cart[code];
+
+    const product = inventory.find(p => p.item_code === code);
+
+    if (!product) continue;
+
+    const price = Number(product.price);
+    const subtotal = price * qty;
+    total += subtotal;
+
+    table.innerHTML += `
+      <tr>
+        <td>${code}</td>
+        <td>${qty}</td>
+        <td>${price}</td>
+        <td>${subtotal.toFixed(2)}</td>
+        <td>
+          <button class="removeBtn" onclick="removeItem('${code}')">Remove</button>
+        </td>
+      </tr>
+    `;
+  }
+
+  document.getElementById("totalBox").textContent = "Total: " + total.toFixed(2);
+}
+
+
+// ===============================
+// REMOVE ITEM
+// ===============================
+function removeItem(code) {
+
+  delete cart[code];
+
+  renderCart();
+}
+
+
+// ===============================
+// BACK BUTTON
+// ===============================
+function goBack() {
+  window.location.href = "index.html";
+}
+
+
+// ===============================
+// CONFIRM ORDER (FINAL CHECKOUT)
+// ===============================
+async function confirmOrder() {
+
+  if (Object.keys(cart).length === 0) {
+    alert("Cart is empty");
+    return;
+  }
+
+  try {
+
+    const res = await fetch("http://localhost:3000/checkout-cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cart })
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      alert(data.error || "Checkout failed");
+      return;
+    }
+
+    alert("Purchase successful!");
+
+    // clear cart
+    cart = {};
+
+    window.location.href = "index.html";
+
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
+  }
+}
+
+
+// ===============================
+// INIT
+// ===============================
+loadData();
+
+</script>
+
+</body>
+</html>
