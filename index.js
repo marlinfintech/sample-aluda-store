@@ -70,25 +70,47 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ===============================
-// ORDER BUTTON TOGGLE SYSTEM
-// ===============================
-document.addEventListener("click", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  // ORDER CLICK
-  if (e.target.classList.contains("order-btn")) {
-    const section = e.target.closest(".order-section");
+  document.querySelectorAll(".productcard").forEach(card => {
 
-    section.querySelector(".order-btn").classList.add("hidden");
-    section.querySelector(".after-order").classList.remove("hidden");
-  }
+    const container = card.querySelector(".placeorder");
 
-  // CANCEL CLICK
-  if (e.target.classList.contains("cancel-btn")) {
-    const section = e.target.closest(".order-section");
+    const orderBtn = card.querySelector(".orderbutton");
+    const cancelBtn = card.querySelector(".cancelbutton");
 
-    section.querySelector(".after-order").classList.add("hidden");
-    section.querySelector(".order-btn").classList.remove("hidden");
-  }
+    const stockLabel = card.querySelector(".instocklabel");
+
+    const orderPlaced = card.querySelector(".orderplaced");
+
+    const orderSection = card.querySelector(".ordersection");
+
+    // ORDER CLICK → SWITCH STATE
+    orderBtn.addEventListener("click", () => {
+
+      container.classList.remove("placeorder");
+      container.classList.add("orderplaced");
+
+      orderSection.style.display = "none";
+      orderPlaced.style.display = "flex";
+
+    });
+
+    // CANCEL CLICK → REVERT STATE
+    cancelBtn.addEventListener("click", () => {
+
+      container.classList.remove("orderplaced");
+      container.classList.add("placeorder");
+
+      stockLabel.textContent = "In Stock";
+      stockLabel.style.color = "black";
+
+      orderSection.style.display = "flex";
+      orderPlaced.style.display = "none";
+
+    });
+
+  });
 
 });
+
