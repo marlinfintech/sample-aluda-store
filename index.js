@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
-// CART + ORDER SYSTEM (FIXED UI RULE)
+// CART + ORDER SYSTEM
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -92,16 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!orderBtn || !cancelBtn || !code) return;
 
-    // ensure correct UI on reload
     if (cart[code]) {
       orderSection.style.display = "none";
       orderPlaced.style.display = "flex";
       if (stockLabel) stockLabel.style.display = "none";
     }
 
-    // =========================
     // ADD TO CART
-    // =========================
     orderBtn.addEventListener("click", () => {
 
       cart[code] = (cart[code] || 0) + 1;
@@ -111,16 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
       orderSection.style.display = "none";
       orderPlaced.style.display = "flex";
 
-      // ✅ FIX: hide stock label completely (this removes your issue)
-      if (stockLabel) {
-        stockLabel.style.display = "none";
-      }
-
+      if (stockLabel) stockLabel.style.display = "none";
     });
 
-    // =========================
     // REMOVE FROM CART
-    // =========================
     cancelBtn.addEventListener("click", () => {
 
       if (cart[code]) {
@@ -134,11 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
       orderSection.style.display = "flex";
       orderPlaced.style.display = "none";
 
-      // restore stock label
-      if (stockLabel) {
-        stockLabel.style.display = "block";
-      }
-
+      if (stockLabel) stockLabel.style.display = "block";
     });
 
   });
@@ -169,8 +156,6 @@ function updateCartUI() {
   badge.textContent = total;
 }
 
-
-// initial render
 updateCartUI();
 
 
@@ -230,7 +215,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 // ===============================
-// CHECKOUT (DB + CLEAR CART)
+// CHECKOUT BUTTON (FIXED FLOW)
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -261,9 +246,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       alert("Order placed successfully!");
 
-      cart = {};
-      saveCart();
-      updateCartUI();
+      // ❗ FIX: DO NOT clear cart here
+      // keep it so checkout.html can read it
 
       window.location.href = "checkout.html";
 
