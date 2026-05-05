@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      alert("Order placed successfully!");
+     // alert("Order placed successfully!");
 
       // ❗ FIX: DO NOT clear cart here
       // keep it so checkout.html can read it
