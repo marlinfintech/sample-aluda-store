@@ -27,7 +27,7 @@ body{background:#FFFAFA;}
 background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#27408B; font-weight:bold;text-align: center;margin:0.125rem}
 
 .categoryproductscard {display: grid;grid-template-columns: repeat(2, 1fr);gap: 0.25rem;}
-.productcard{display:flex;flex-direction:column;gap:0.125rem;border:3px solid #FFD700;background:#FFFFFF;padding:0;}
+.productcard{display:flex;flex-direction:column;gap:0rem;border:3px solid #FFD700;background:#FFFFFF;padding:0;}
 
 .productdescription {background:#FFFAFA;width: 100%;word-break:break-word;overflow-wrap: break-word;line-height:1;flex-grow: 1;}
 .productdescription p{margin: 0.5rem 0}
