@@ -33,7 +33,7 @@ background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#27408B; fon
 .productdescription p{margin: 0.5rem 0}
 
 .productimageandbutton {display: grid;}
-.productimage {width: 100%;height: 300px;overflow: hidden;padding: 0;margin:0}
+.productimage {width: 100%;height: 175px;overflow: hidden;padding: 0;margin:0}
 .productimage img{width:100%;height:100%;display: block;padding: 0;margin: 0}
 .hidden {display: none;}
 
@@ -156,3 +156,5 @@ footer{background:#FFFAFA;text-align:center; color:#FF8C00;padding-bottom:3rem;}
 @media(min-width:1000px){.categoryproductscard{ grid-template-columns:repeat(4,1fr);}}
 
 @media(min-width:1000px){ .viewbuttonsection{grid-column: span 4}}
+
+@media(min-width:1000px){ .productimage {width: 100%;height: 300px;}}
