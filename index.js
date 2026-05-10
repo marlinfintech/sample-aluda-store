@@ -188,11 +188,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (product.stock_available <= 0) {
 
         stockLabel.textContent = "Out of Stock";
-        stockLabel.style.color = "red";
+        stockLabel.style.color = "#EE0000";
 
         orderBtn.disabled = true;
         orderBtn.textContent = "Unavailable";
-        orderBtn.style.opacity = "0.5";
+        orderBtn.style.opacity = "0.2";
 
       } else {
 

@@ -1,7 +1,22 @@
 html,body{height:100%;width:100%;margin:0;font-size:1.2rem;font-family:serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth}
-body{background:#B0C4DE}
+body{background:#FFFAFA}
 
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem}
+
+.header{background:#00BFFF;text-align:center;position:relative;overflow:visible}
+.header h4{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto}
+
+.menu-container {position: absolute;bottom:0.125rem;left:0;z-index: 1000;}
+#menu-toggle {display: none;}
+.menu-icon {display: flex;flex-direction: column;gap: 4px;cursor: pointer;}
+.menu-icon span {width: 40px;height: 5px;background:#27408B;border-radius: 0;}
+.dropdown-menu {position: absolute;left: 0;top: 1rem;background: #00BFFF;border-radius: 0;display: none;width: max-content;min-width:170px;
+  overflow: visible;box-shadow: 0px 0px 10px #FFFFFF;}
+.dropdown-menu a {display: block;padding: 0.7rem 1rem;text-decoration: underline;white-space: nowrap;color:#27408B;font-weight:bold;
+  font-size:1rem;border-top-right-radius: 0px}
+.dropdown-menu a:hover {background: #CCCCCC;color: #FFFFFF;}
+#menu-toggle:checked + .menu-icon + .dropdown-menu {display: block;}
+
 
 .checkoutcard{background:linear-gradient(to top, #B0C4DE 75%, #B0C4DE);display: flex;flex-direction: column;
   justify-content: center;text-align: center;flex:1;gap:0.25rem;width: 80%;margin: 0 auto}
@@ -14,14 +29,14 @@ body{background:#B0C4DE}
 .checkouttable th {border:3px solid #FFFFFF;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;}
 
 .checkoutbuttons{width: 25%;margin:0 auto; display: flex;justify-content: space-between}
+.ordersummary{font-weight: bold}
+.backbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #00BFFF, #00BFFF); color:#FFFFFF;
+    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
 
-.backbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #27408B, #00BFFF); color:#FFFFFF;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:normal;
-    justify-content:center}
 
-.confirmbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #27408B, #00BFFF); color:#FFFFFF;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:normal;
-    justify-content:center}
+.confirmbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #00BFFF, #00BFFF); color:#FFFFFF;
+    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
+
 
 .removeBtn{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #FFFFFF, #CCCCCC); color:#008B8B;
     padding:0.25rem 0.5rem 0.25rem 0.5rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:0.75rem;font-weight:normal;
