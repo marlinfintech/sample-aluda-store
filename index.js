@@ -1,11 +1,38 @@
 // ===============================
+// SUPABASE CONNECTION
+// ===============================
+const supabaseUrl = "https://lssjpyikumgycgpmiqub.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxzc2pweWlrdW1neWNncG1pcXViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MjY4MjUsImV4cCI6MjA5MzMwMjgyNX0.lu5mMuLrMO8pOpuPMwNx9paJkJRDrJu1BGX17cKqcX8";
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+
+// ===============================
 // CART STATE (PERSISTENT)
 // ===============================
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
+let inventory = [];
 
 // save cart helper
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+
+// ===============================
+// LOAD INVENTORY FROM SUPABASE
+// ===============================
+async function loadInventory() {
+  const { data, error } = await supabase
+    .from("inventory")
+    .select("*");
+
+  if (error) {
+    console.error("Inventory load error:", error);
+    return;
+  }
+
+  inventory = data;
 }
 
 
@@ -46,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
-// MENU TOGGLE BEHAVIOR
+// MENU TOGGLE
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -75,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
-// CART + ORDER SYSTEM
+// CART SYSTEM (ADD / REMOVE)
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -134,15 +161,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
-// CART UI COUNTER
+// CART COUNTER UI
 // ===============================
 function updateCartUI() {
 
   const total = Object.values(cart).reduce((a, b) => a + b, 0);
 
   let badge = document.getElementById("cart-count");
-
   const checkoutBtn = document.querySelector(".checkoutbutton");
+
   if (!checkoutBtn) return;
 
   if (!badge) {
@@ -160,62 +187,52 @@ updateCartUI();
 
 
 // ===============================
-// INVENTORY LOADER
+// INVENTORY + STOCK CHECK (SUPABASE)
 // ===============================
 document.addEventListener("DOMContentLoaded", async () => {
 
-  try {
+  await loadInventory();
 
-    const res = await fetch("http://localhost:3000/inventory");
-    if (!res.ok) return;
+  document.querySelectorAll(".productcard").forEach(card => {
 
-    const inventory = await res.json();
+    const img = card.querySelector(".productimage");
+    const code = img?.dataset.item_code;
 
-    document.querySelectorAll(".productcard").forEach(card => {
+    if (!code) return;
 
-      const img = card.querySelector(".productimage");
-      const code = img?.dataset.item_code;
+    const product = inventory.find(p => p.item_code === code);
 
-      if (!code) return;
+    const stockLabel = card.querySelector(".instocklabel");
+    const orderBtn = card.querySelector(".orderbutton");
 
-      const product = inventory.find(p => p.item_code === code);
+    if (!product) return;
 
-      const stockLabel = card.querySelector(".instocklabel");
-      const orderBtn = card.querySelector(".orderbutton");
+    if (product.stock_available <= 0) {
 
-      if (!product) return;
+      stockLabel.textContent = "Out of Stock";
+      stockLabel.style.color = "#EE0000";
 
-      if (product.stock_available <= 0) {
+      orderBtn.disabled = true;
+      orderBtn.textContent = "Unavailable";
+      orderBtn.style.opacity = "0.2";
 
-        stockLabel.textContent = "Out of Stock";
-        stockLabel.style.color = "#EE0000";
+    } else {
 
-        orderBtn.disabled = true;
-        orderBtn.textContent = "Unavailable";
-        orderBtn.style.opacity = "0.2";
+      stockLabel.textContent = "In Stock";
+      stockLabel.style.color = "#000000";
 
-      } else {
+      orderBtn.disabled = false;
+      orderBtn.textContent = "Order";
+      orderBtn.style.opacity = "1";
+    }
 
-        stockLabel.textContent = "In Stock";
-        stockLabel.style.color = "#000000";
-
-        orderBtn.disabled = false;
-        orderBtn.textContent = "Order";
-        orderBtn.style.opacity = "1";
-
-      }
-
-    });
-
-  } catch (err) {
-    console.error("Inventory load error:", err);
-  }
+  });
 
 });
 
 
 // ===============================
-// CHECKOUT BUTTON (FIXED FLOW)
+// CHECKOUT (SUPABASE)
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -231,25 +248,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
 
-      const res = await fetch("http://localhost:3000/checkout-cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart })
-      });
+      // 1. Create order
+      const { data: order, error: orderError } = await supabase
+        .from("orders")
+        .insert([{ total_amount: 0 }])
+        .select()
+        .single();
 
-      const data = await res.json();
+      if (orderError) throw orderError;
 
-      if (!data.success) {
-        alert(data.error || "Checkout failed");
-        return;
+      let total = 0;
+
+      // 2. Process cart items
+      for (let code in cart) {
+
+        const qty = cart[code];
+
+        const product = inventory.find(p => p.item_code === code);
+        if (!product) continue;
+
+        const subtotal = product.price * qty;
+        total += subtotal;
+
+        // order_items
+        await supabase.from("order_items").insert([{
+          order_id: order.id,
+          item_code: code,
+          item_name: product.item_name,
+          quantity: qty,
+          price: product.price,
+          subtotal: subtotal
+        }]);
+
+        // update stock
+        await supabase
+          .from("inventory")
+          .update({
+            stock_available: product.stock_available - qty
+          })
+          .eq("item_code", code);
       }
 
-     // alert("Order placed successfully!");
+      // 3. update order total
+      await supabase
+        .from("orders")
+        .update({ total_amount: total })
+        .eq("id", order.id);
 
-      // ❗ FIX: DO NOT clear cart here
-      // keep it so checkout.html can read it
+      alert("Order placed successfully!");
 
-      window.location.href = "checkout.html";
+      cart = {};
+      localStorage.removeItem("cart");
+
+      window.location.href = "index.html";
 
     } catch (err) {
       console.error(err);
@@ -259,27 +310,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-
-
-
-// 1. Connect to Supabase
-const supabaseUrl = "https://lssjpyikumgycgpmiqub.supabase.co";
-const supabaseKey = "YOUR_ANON_KEY";
-
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-// 2. Fetch products from inventory table
-async function loadProducts() {
-  const { data, error } = await supabase
-    .from('inventory')
-    .select('*');
-
-  if (error) {
-    console.error("Error fetching products:", error);
-    return;
-  }
-
-  console.log("Products:", data);
-}
-
-loadProducts();
