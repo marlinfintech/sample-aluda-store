@@ -41,3 +41,6 @@ body{background:#FFFAFA}
 .removeBtn{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #FFFFFF, #CCCCCC); color:#008B8B;
     padding:0.25rem 0.5rem 0.25rem 0.5rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:0.75rem;font-weight:normal;
     justify-content:center}
+
+    footer{background:#FFFAFA;text-align:center; color:#FF8C00;padding-bottom:3rem;}
+.endsection p{background: linear-gradient(to bottom,#000000 10%, #000000);background-clip: text;color: transparent;font-size:small;text-align: center;}
