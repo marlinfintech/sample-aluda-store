@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
-// LOAD INVENTORY FROM SUPABASE
+// LOAD INVENTORY
 // ===============================
 async function loadInventory() {
 
