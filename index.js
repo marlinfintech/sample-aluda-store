@@ -232,75 +232,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 // ===============================
-// CHECKOUT (SUPABASE)
+// CHECKOUT BUTTON → NAVIGATE TO CHECKOUT PAGE
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   const checkoutBtn = document.querySelector(".checkoutbutton");
   if (!checkoutBtn) return;
 
-  checkoutBtn.addEventListener("click", async () => {
+  checkoutBtn.addEventListener("click", () => {
 
     if (Object.keys(cart).length === 0) {
       alert("Cart is empty");
       return;
     }
 
-    try {
-
-      const { data: order, error: orderError } = await db
-        .from("orders")
-        .insert([{ total_amount: 0 }])
-        .select()
-        .single();
-
-      if (orderError) throw orderError;
-
-      let total = 0;
-
-      for (let code in cart) {
-
-        const qty = cart[code];
-
-        const product = inventory.find(p => p.item_code === code);
-        if (!product) continue;
-
-        const subtotal = product.price * qty;
-        total += subtotal;
-
-        await db.from("order_items").insert([{
-          order_id: order.id,
-          item_code: code,
-          item_name: product.item_name,
-          quantity: qty,
-          price: product.price,
-          subtotal: subtotal
-        }]);
-
-        await db
-          .from("inventory")
-          .update({
-            stock_available: product.stock_available - qty
-          })
-          .eq("item_code", code);
-      }
-
-      await db
-        .from("orders")
-        .update({ total_amount: total })
-        .eq("id", order.id);
-
-      alert("Order placed successfully!");
-
-      cart = {};
-      localStorage.removeItem("cart");
-
-      window.location.href = "checkout.html";
-
-    } catch (err) {
-      console.error(err);
-      alert("Checkout failed");
-    }
+    window.location.href = "checkout.html";
 
   });
 
