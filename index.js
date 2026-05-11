@@ -1,7 +1,7 @@
 // ===============================
 // SUPABASE CONNECTION (USE EXISTING CLIENT)
 // ===============================
-const supabase = window.supabaseClient;
+const db = window.supabaseClient;
 
 
 // ===============================
@@ -23,7 +23,7 @@ function saveCart() {
 // LOAD INVENTORY FROM SUPABASE
 // ===============================
 async function loadInventory() {
-  const { data, error } = await supabase
+  const { data, error } = await db
     .from("inventory")
     .select("*");
 
@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
 
-      const { data: order, error: orderError } = await supabase
+      const { data: order, error: orderError } = await db
         .from("orders")
         .insert([{ total_amount: 0 }])
         .select()
@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const subtotal = product.price * qty;
         total += subtotal;
 
-        await supabase.from("order_items").insert([{
+        await db.from("order_items").insert([{
           order_id: order.id,
           item_code: code,
           item_name: product.item_name,
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
           subtotal: subtotal
         }]);
 
-        await supabase
+        await db
           .from("inventory")
           .update({
             stock_available: product.stock_available - qty
@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .eq("item_code", code);
       }
 
-      await supabase
+      await db
         .from("orders")
         .update({ total_amount: total })
         .eq("id", order.id);
