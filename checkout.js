@@ -221,7 +221,7 @@ async function confirmOrder() {
       .update({ total_amount: total })
       .eq("id", order.id);
 
-    alert("Order placed successfully!");
+    alert("Order placed successfully! However this is just a sample store : )");
 
     cart = {};
     localStorage.removeItem("cart");
