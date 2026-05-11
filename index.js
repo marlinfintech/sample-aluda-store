@@ -259,3 +259,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
+
+
+// 1. Connect to Supabase
+const supabaseUrl = "https://lssjpyikumgycgpmiqub.supabase.co";
+const supabaseKey = "YOUR_ANON_KEY";
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// 2. Fetch products from inventory table
+async function loadProducts() {
+  const { data, error } = await supabase
+    .from('inventory')
+    .select('*');
+
+  if (error) {
+    console.error("Error fetching products:", error);
+    return;
+  }
+
+  console.log("Products:", data);
+}
+
+loadProducts();
