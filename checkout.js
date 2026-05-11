@@ -1,7 +1,7 @@
 // ===============================
 // SUPABASE CONNECTION (USE EXISTING CLIENT)
 // ===============================
-const supabase = window.supabaseClient;
+const db = window.supabaseClient;
 
 
 // ===============================
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ===============================
 async function loadInventory() {
 
-  const { data, error } = await supabase
+  const { data, error } = await db
     .from("inventory")
     .select("*");
 
@@ -175,7 +175,7 @@ async function confirmOrder() {
   try {
 
     // 1. Create order
-    const { data: order, error: orderError } = await supabase
+    const { data: order, error: orderError } = await db
       .from("orders")
       .insert([{ total_amount: 0 }])
       .select()
@@ -197,7 +197,7 @@ async function confirmOrder() {
       total += subtotal;
 
       // Insert order items
-      await supabase.from("order_items").insert([{
+      await db.from("order_items").insert([{
         order_id: order.id,
         item_code: code,
         item_name: product.item_name,
@@ -207,7 +207,7 @@ async function confirmOrder() {
       }]);
 
       // Update stock
-      await supabase
+      await db
         .from("inventory")
         .update({
           stock_available: product.stock_available - qty
@@ -216,7 +216,7 @@ async function confirmOrder() {
     }
 
     // 3. Update order total
-    await supabase
+    await db
       .from("orders")
       .update({ total_amount: total })
       .eq("id", order.id);
