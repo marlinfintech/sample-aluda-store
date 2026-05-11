@@ -1,10 +1,14 @@
 // ===============================
-// SUPABASE CONNECTION
+// SUPABASE CONNECTION (USE EXISTING CLIENT)
 // ===============================
-const supabaseUrl = "https://lssjpyikumgycgpmiqub.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxzc2pweWlrdW1neWNncG1pcXViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MjY4MjUsImV4cCI6MjA5MzMwMjgyNX0.lu5mMuLrMO8pOpuPMwNx9paJkJRDrJu1BGX17cKqcX8";";
-
 const supabase = window.supabaseClient;
+
+
+// ===============================
+// STATE
+// ===============================
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+let inventory = [];
 
 
 // ===============================
@@ -37,14 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
-// STATE
-// ===============================
-let cart = JSON.parse(localStorage.getItem("cart")) || {};
-let inventory = [];
-
-
-// ===============================
-// LOAD INVENTORY (SUPABASE)
+// LOAD INVENTORY FROM SUPABASE
 // ===============================
 async function loadInventory() {
 
@@ -63,7 +60,7 @@ async function loadInventory() {
 
 
 // ===============================
-// INIT
+// INIT PAGE
 // ===============================
 document.addEventListener("DOMContentLoaded", async () => {
   await loadInventory();
@@ -72,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 // ===============================
-// RENDER CART
+// RENDER CART TABLE
 // ===============================
 function renderCart() {
 
@@ -122,7 +119,7 @@ function renderCart() {
 
   const totalBox = document.getElementById("totalBox");
   if (totalBox) {
-    totalBox.textContent = "TOTAL : " + total.toFixed(2);
+    totalBox.textContent = "TOTAL: " + total.toFixed(2);
   }
 }
 
@@ -188,7 +185,7 @@ async function confirmOrder() {
 
     let total = 0;
 
-    // 2. Process cart
+    // 2. Process cart items
     for (let code in cart) {
 
       const qty = cart[code];
@@ -199,7 +196,7 @@ async function confirmOrder() {
       const subtotal = product.price * qty;
       total += subtotal;
 
-      // insert order items
+      // Insert order items
       await supabase.from("order_items").insert([{
         order_id: order.id,
         item_code: code,
@@ -209,7 +206,7 @@ async function confirmOrder() {
         subtotal: subtotal
       }]);
 
-      // update stock
+      // Update stock
       await supabase
         .from("inventory")
         .update({
@@ -218,7 +215,7 @@ async function confirmOrder() {
         .eq("item_code", code);
     }
 
-    // 3. update order total
+    // 3. Update order total
     await supabase
       .from("orders")
       .update({ total_amount: total })
