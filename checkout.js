@@ -221,7 +221,7 @@ async function confirmOrder() {
       .update({ total_amount: total })
       .eq("id", order.id);
 
-    alert("Order placed successfully! However, this is just a sample store by marlin fintech : )");
+    alert("Order placed successfully ! However, this is just a Sample Store by Marlin Fintech : )");
 
     cart = {};
     localStorage.removeItem("cart");
