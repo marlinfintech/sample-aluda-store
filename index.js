@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cart = {};
       localStorage.removeItem("cart");
 
-      window.location.href = "index.html";
+      window.location.href = "checkout.html";
 
     } catch (err) {
       console.error(err);
