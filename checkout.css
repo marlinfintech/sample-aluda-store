@@ -52,7 +52,7 @@ body{background:#FFFAFA}
   background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#000000; font-weight:bold;text-align: center;margin:0.125rem}
 
 
-.checkouttable{background:#B0C4DE;margin: 0 auto;width: 70%;font-size: 1rem}
+.checkouttable{background:#B0C4DE;margin: 0 auto;width: 70%;font-size: 1rem;font-weight: bold}
 .checkouttable table{border:3px solid #FFFFFF;overflow: hidden;width: 70%;margin: 0 auto}
 .checkouttable th {border:3px solid #FFFFFF;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;margin: 0 auto}
 
