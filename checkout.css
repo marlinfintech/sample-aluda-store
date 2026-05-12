@@ -19,16 +19,16 @@ body{background:#FFFAFA}
 
 
 .checkoutcard{background:linear-gradient(to top, #B0C4DE 75%, #B0C4DE);display: flex;flex-direction: column;
-  justify-content: center;text-align: center;flex:1;gap:0.25rem;width: 80%;margin: 0 auto}
+  justify-content: center;text-align: center;flex:1;gap:0.25rem;width: 100%;margin: 0 auto}
 .checkoutcard h4{text-align:center; background: linear-gradient(to bottom, #B23AEE 30%,  #00BFFF);
   background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#000000; font-weight:bold;text-align: center;margin:0.125rem}
 
 
-.checkouttable{background:#B0C4DE;margin: 0 auto;}
-.checkouttable table{border:3px solid #FFFFFF;overflow: hidden;}
-.checkouttable th {border:3px solid #FFFFFF;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;}
+.checkouttable{background:#B0C4DE;margin: 0 auto;width: 100%;font-size: 0.75rem}
+.checkouttable table{border:1px solid #FFFFFF;overflow: hidden;width: 100%}
+.checkouttable th {border:1px solid #FFFFFF;color: #000000; padding: 0rem;text-align: center;font-weight: normal;}
 
-.checkoutbuttons{width: 25%;margin:0 auto; display: flex;justify-content: space-between}
+.checkoutbuttons{width: 60%;margin:0 auto; display: flex;justify-content: space-between}
 .ordersummary{font-weight: bold}
 .backbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#FFFFFF;
     padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
@@ -44,3 +44,18 @@ body{background:#FFFAFA}
 
     footer{background:#FFFAFA;text-align:center; color:#FF8C00;padding-bottom:3rem;width: 100%}
 .endsection p{background: linear-gradient(to bottom,#000000 10%, #000000);background-clip: text;color: transparent;font-size:small;text-align: center;}
+
+@media(min-width:1000px){ 
+.checkoutcard{background:linear-gradient(to top, #B0C4DE 75%, #B0C4DE);display: flex;flex-direction: column;
+  justify-content: center;text-align: center;flex:1;gap:0.25rem;width: 80%;margin: 0 auto}
+.checkoutcard h4{text-align:center; background: linear-gradient(to bottom, #B23AEE 30%,  #00BFFF);
+  background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#000000; font-weight:bold;text-align: center;margin:0.125rem}
+
+
+.checkouttable{background:#B0C4DE;margin: 0 auto;width: 70%}
+.checkouttable table{border:3px solid #FFFFFF;overflow: hidden;width: 70%;margin: 0 auto}
+.checkouttable th {border:3px solid #FFFFFF;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;margin: 0 auto}
+
+.checkoutbuttons{width: 25%;margin:0 auto; display: flex;justify-content: space-between}
+}
+
