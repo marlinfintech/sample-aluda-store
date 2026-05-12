@@ -1,19 +1,11 @@
-// ===============================
 // SUPABASE CONNECTION (USE EXISTING CLIENT)
-// ===============================
 const db = window.supabaseClient;
 
-
-// ===============================
 // STATE
-// ===============================
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
 let inventory = [];
 
-
-// ===============================
 // MENU TOGGLE
-// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   const menuToggle = document.getElementById("menu-toggle");
@@ -39,10 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-// ===============================
 // LOAD INVENTORY
-// ===============================
 async function loadInventory() {
 
   const { data, error } = await db
@@ -58,19 +47,13 @@ async function loadInventory() {
   inventory = data || [];
 }
 
-
-// ===============================
 // INIT PAGE
-// ===============================
 document.addEventListener("DOMContentLoaded", async () => {
   await loadInventory();
   renderCart();
 });
 
-
-// ===============================
 // RENDER CART TABLE
-// ===============================
 function renderCart() {
 
   const table = document.getElementById("cartTable");
@@ -123,10 +106,7 @@ function renderCart() {
   }
 }
 
-
-// ===============================
 // CHANGE QUANTITY
-// ===============================
 function changeQty(code, delta) {
 
   if (!cart[code]) return;
@@ -141,10 +121,7 @@ function changeQty(code, delta) {
   renderCart();
 }
 
-
-// ===============================
 // REMOVE ITEM
-// ===============================
 function removeItem(code) {
 
   delete cart[code];
@@ -153,18 +130,12 @@ function removeItem(code) {
   renderCart();
 }
 
-
-// ===============================
 // GO BACK
-// ===============================
 function goBack() {
   window.location.href = "index.html";
 }
 
-
-// ===============================
 // CONFIRM ORDER (SUPABASE)
-// ===============================
 async function confirmOrder() {
 
   if (Object.keys(cart).length === 0) {

@@ -45,65 +45,25 @@ background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#27408B; fon
     padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
 .cancelbutton:hover{background: #82E0FF}
 
-.ordersection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+.ordersection {display: flex;flex-direction: column;align-items: center;}
 
-/* keep buttons aligned like your current design */
-.after-order {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
+.after-order {display: flex;flex-direction: column;gap: 0.25rem;}
 
-.after-order.hidden {
-    display: none;
-}
+.after-order.hidden {display: none;}
 /* visual feedback */
-.addedtocartlabel {
-    background: none;
-    border: none;
-    box-shadow: none;
-    color: #008B00;          /* or inherit */
-    padding: 0;
-    margin: 0.5rem 0;
-    cursor: default;
-}
+.addedtocartlabel {background: none;border: none;box-shadow: none;color: #008B00;padding: 0;margin: 0.5rem 0;cursor: default;}
 
-.instocklabel {
-    background: none;
-    border: none;
-    box-shadow: none;
-    color: #000000;          /* or inherit */
-    padding: 0;
-    margin: 0.5rem 0;
-    cursor: default;
-}
+.instocklabel {background: none;border: none;box-shadow: none;color: #000000; padding: 0;margin: 0.5rem 0;cursor: default;}
 
-.orderplaced {
-  display: none;
-}
+.orderplaced {display: none;}
 
-.placeorder .orderplaced {
-  display: none;
-}
+.placeorder .orderplaced {display: none;}
 
+.orderplaced {display: flex;flex-direction: column;align-items: center;}
 
-.orderplaced {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+.placeorder .instocklabel {display: block;}
 
-.placeorder .instocklabel {
-  display: block;
-}
-
-.orderplaced .instocklabel {
-  display: none;
-}
+.orderplaced .instocklabel {display: none;}
 
 .viewbuttonsection{grid-column: span 2;align-items:center;background:#FFFFFF}
 .viewbutton{text-align:center ;border-radius: 0.25rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); 
@@ -137,34 +97,13 @@ footer{background:#FFFAFA;text-align:center; color:#FF8C00;padding-bottom:3rem;}
 .bottombar button:hover{background: #82E0FF}
 a {color:#FFFFFF;text-decoration: none}
 
-.cartpanel {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 300px;
-  height: 100%;
-  background: white;
-  border-left: 2px solid #27408B;
-  padding: 1rem;
-  overflow-y: auto;
-  z-index: 2000;
-}
+.cartpanel {position: fixed;right: 0;top: 0;width: 300px;height: 100%;background: white;border-left: 2px solid #27408B;padding: 1rem;overflow-y: auto;z-index: 2000;}
 
-.cartpanel.hidden {
-  display: none;
-}
+.cartpanel.hidden {display: none;}
 
-.cartitem {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.5rem 0;
-}
+.cartitem {display: flex;justify-content: space-between;margin: 0.5rem 0;}
 
-.qtycontrols {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+.qtycontrols {display: flex;align-items: center;gap: 0.5rem;}
 
 @media(min-width:1000px){.categoryproductscard{ grid-template-columns:repeat(4,1fr);}}
 

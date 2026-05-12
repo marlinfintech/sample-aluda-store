@@ -1,27 +1,21 @@
-// ===============================
+
 // SUPABASE CONNECTION (USE EXISTING CLIENT)
-// ===============================
+
 const db = window.supabaseClient;
 
-
-// ===============================
 // CART STATE (PERSISTENT)
-// ===============================
+
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
 let inventory = [];
 
-
-// ===============================
 // SAVE CART HELPER
-// ===============================
+
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-
-// ===============================
 // LOAD INVENTORY FROM SUPABASE
-// ===============================
+
 async function loadInventory() {
   const { data, error } = await db
     .from("inventory")
@@ -35,10 +29,7 @@ async function loadInventory() {
   inventory = data || [];
 }
 
-
-// ===============================
 // VIEW MORE / SHOW LESS PRODUCTS
-// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".categoryproductscard").forEach(card => {
@@ -72,9 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ===============================
 // MENU TOGGLE
-// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   const menuToggle = document.getElementById("menu-toggle");
@@ -101,9 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ===============================
 // MENU TOGGLE
-// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   const menuToggle2 = document.getElementById("menu-toggle2");
@@ -129,12 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-
-
-// ===============================
 // CART SYSTEM (ADD / REMOVE)
-// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".productcard").forEach(card => {
@@ -190,10 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-// ===============================
 // CART COUNTER UI
-// ===============================
 function updateCartUI() {
 
   const total = Object.values(cart).reduce((a, b) => a + b, 0);
@@ -216,10 +195,7 @@ function updateCartUI() {
 
 updateCartUI();
 
-
-// ===============================
 // INVENTORY + STOCK CHECK
-// ===============================
 document.addEventListener("DOMContentLoaded", async () => {
 
   await loadInventory();
@@ -261,10 +237,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
-
-// ===============================
 // CHECKOUT BUTTON → NAVIGATE TO CHECKOUT PAGE
-// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
   const checkoutBtn = document.querySelector(".checkoutbutton");
