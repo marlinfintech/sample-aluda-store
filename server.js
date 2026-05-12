@@ -8,10 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
-// ===============================
 // DATABASE CONNECTION
-// ===============================
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
@@ -20,17 +17,11 @@ const pool = new Pool({
   port: 5432
 });
 
-
-// ===============================
 // HTTP + WS SERVER
-// ===============================
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-
-// ===============================
 // SAFE BROADCAST
-// ===============================
 function broadcast(data) {
   const msg = JSON.stringify(data);
 
@@ -45,10 +36,7 @@ function broadcast(data) {
   });
 }
 
-
-// ===============================
 // GET INVENTORY (UNCHANGED)
-// ===============================
 app.get("/inventory", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM inventory ORDER BY id");
@@ -59,10 +47,7 @@ app.get("/inventory", async (req, res) => {
   }
 });
 
-
-// ===============================
 // LEGACY SINGLE CHECKOUT (KEEP SAFE)
-// ===============================
 app.post("/checkout", async (req, res) => {
 
   const { item_code } = req.body;
@@ -94,9 +79,7 @@ app.post("/checkout", async (req, res) => {
 });
 
 
-// ===============================
 // CART CHECKOUT (NOW PERSISTENT SAFE CORE)
-// ===============================
 app.post("/checkout-cart", async (req, res) => {
 
   const cart = req.body.cart;
@@ -168,10 +151,7 @@ app.post("/checkout-cart", async (req, res) => {
   }
 });
 
-
-// ===============================
 // PERSISTENT ORDER HISTORY (NEW)
-// ===============================
 app.get("/orders", async (req, res) => {
 
   try {
@@ -194,18 +174,12 @@ app.get("/orders", async (req, res) => {
   }
 });
 
-
-// ===============================
 // WEBSOCKET CONNECTION
-// ===============================
 wss.on("connection", (ws) => {
   console.log("Client connected to WebSocket");
 });
 
-
-// ===============================
 // START SERVER
-// ===============================
 server.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
 });
