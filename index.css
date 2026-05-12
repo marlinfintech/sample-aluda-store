@@ -1,5 +1,5 @@
 html,body{height:100%;width:100%;margin:0;font-size:1.2rem;font-family:serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth}
-body{background:#FFFAFA;}
+body{background:#FFFAFA;overflow-x: hidden;}
 
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem}
 
@@ -19,7 +19,8 @@ body{background:#FFFAFA;}
 
 .intro{background:#FFFAFA;text-align: center; color:#000000; font-family:serif;word-spacing:2px; line-height:1.5;font-weight:normal; 
   padding-left: 3rem;padding-right: 3rem;padding-top:0;padding-bottom:0;margin:0}
-.intro p{padding:0.5rem  0 0 0 ;margin:0}
+.intro p{padding:0.5rem  0 0 0 ;margin:0;animation-duration: 3s;animation-name: slide-in;}
+@keyframes slide-in{from{translate: 0 0vw;scale:200% 1;} to {translate: 0 0;scale:100% 1;}}
 
 .categorycard{background:linear-gradient(to top, #00BFFF 75%, #00BFFF);display: flex;flex-direction: column;justify-content: center;
   text-align: center;flex:1;gap:0.25rem}
