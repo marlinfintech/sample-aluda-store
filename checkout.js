@@ -51,7 +51,7 @@ async function loadInventory() {
 
   if (error) {
     console.error("Inventory load error:", error);
-    alert("Failed to load inventory");
+    alert("Failed to Load Inventory !");
     return;
   }
 
@@ -119,7 +119,7 @@ function renderCart() {
 
   const totalBox = document.getElementById("totalBox");
   if (totalBox) {
-    totalBox.textContent = "TOTAL: " + total.toFixed(2);
+    totalBox.textContent = "TOTAL : " + total.toFixed(2);
   }
 }
 
@@ -168,7 +168,7 @@ function goBack() {
 async function confirmOrder() {
 
   if (Object.keys(cart).length === 0) {
-    alert("Cart is empty");
+    alert("The Cart is Empty !");
     return;
   }
 
@@ -221,7 +221,7 @@ async function confirmOrder() {
       .update({ total_amount: total })
       .eq("id", order.id);
 
-    alert("Order placed successfully ! However, this is just a Sample Store by Marlin Fintech : )");
+    alert("Order placed Successfully ! However, this is just a Sample Store by Marlin Fintech : )");
 
     cart = {};
     localStorage.removeItem("cart");
@@ -230,6 +230,6 @@ async function confirmOrder() {
 
   } catch (err) {
     console.error("Checkout error:", err);
-    alert("Checkout failed");
+    alert("Checkout Failed !");
   }
 }

@@ -26,7 +26,7 @@ body{background:#FFFAFA}
 
 .checkouttable{background:#B0C4DE;margin: 0 auto;width: 100%;font-size: 0.75rem}
 .checkouttable table{border:1px solid #FFFFFF;overflow: hidden;width: 100%}
-.checkouttable th {border:1px solid #FFFFFF;color: #000000; padding: 0rem;text-align: center;font-weight: normal;}
+.checkouttable th {border:1px solid #FFFFFF;color: #000000; padding: 0rem;text-align: center;font-weight: normal;white-space: nowrap;overflow: hidden;}
 
 .checkoutbuttons{width: 60%;margin:0 auto; display: flex;justify-content: space-between}
 .ordersummary{font-weight: bold}
@@ -52,9 +52,10 @@ body{background:#FFFAFA}
   background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#000000; font-weight:bold;text-align: center;margin:0.125rem}
 
 
-.checkouttable{background:#B0C4DE;margin: 0 auto;width: 70%;font-size: 1rem;font-weight: bold}
-.checkouttable table{border:3px solid #FFFFFF;overflow: hidden;width: 70%;margin: 0 auto}
-.checkouttable th {border:3px solid #FFFFFF;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;margin: 0 auto}
+.checkouttable{background:#B0C4DE;margin: 0 auto;width: 80%;font-size: 1rem;font-weight: bold}
+.checkouttable table{border:3px solid #FFFFFF;overflow: hidden;width: 100%;margin: 0 auto}
+.checkouttable th {border:3px solid #FFFFFF;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;
+  margin: 0 auto;white-space: nowrap;overflow: hidden;}
 
 .checkoutbuttons{width: 25%;margin:0 auto; display: flex;justify-content: space-between}
 }

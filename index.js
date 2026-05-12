@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
   checkoutBtn.addEventListener("click", () => {
 
     if (Object.keys(cart).length === 0) {
-      alert("Cart is empty");
+      alert("The Cart is Empty !");
       return;
     }
 
