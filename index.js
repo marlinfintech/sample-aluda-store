@@ -102,6 +102,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===============================
+// MENU TOGGLE
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+
+  const menuToggle2 = document.getElementById("menu-toggle2");
+  const menuContainer2 = document.querySelector(".menu-container2");
+  const menuLinks2 = document.querySelectorAll(".dropdown-menu2 a");
+  const menuIcon2 = document.querySelector(".menu-icon2");
+
+  if (!menuToggle2 || !menuContainer2 || !menuIcon2) return;
+
+  menuIcon2.addEventListener("click", e => e.stopPropagation());
+
+  menuLinks2.forEach(link => {
+    link.addEventListener("click", () => {
+      menuToggle2.checked = false;
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (menuToggle2.checked && !menuContainer2.contains(event.target)) {
+      setTimeout(() => menuToggle2.checked = false, 10);
+    }
+  });
+
+});
+
+
+
+
+// ===============================
 // CART SYSTEM (ADD / REMOVE)
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
