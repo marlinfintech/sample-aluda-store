@@ -6,7 +6,7 @@ body{background:#FFFAFA;}
 .header{background:#00BFFF;text-align:center;position:relative;overflow:visible}
 .header h4{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto}
 
-.menu-container {position: absolute;bottom:0.5rem;left:0;z-index: 1000;}
+.menu-container {position: absolute;bottom:0.5rem;left:0;z-index: 1000;text-align: left}
 #menu-toggle {display: none;}
 .menu-icon {display: flex;flex-direction: column;gap: 4px;cursor: pointer;}
 .menu-icon span {width: 40px;height: 5px;background:#27408B;border-radius: 0;}
