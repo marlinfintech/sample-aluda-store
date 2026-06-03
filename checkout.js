@@ -1,4 +1,4 @@
-// SUPABASE CONNECTION (USE EXISTING CLIENT)
+// SUPABASE CONNECTION
 const db = window.supabaseClient;
 
 // STATE
@@ -192,7 +192,7 @@ async function confirmOrder() {
       .update({ total_amount: total })
       .eq("id", order.id);
 
-    alert("Your Order has been Successfully Placed ! However, this is just a Sample Store E-Commere Website by Marlin Fintech. Thank you !");
+    alert("Your Order has been Successfully Placed! Sample Store E-Commerce Website by Marlin Fintech. Thank you!");
 
     cart = {};
     localStorage.removeItem("cart");
