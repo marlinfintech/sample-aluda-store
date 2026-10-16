@@ -1,10 +1,35 @@
-html,body{height:100%;width:100%;margin:0;font-size:1rem;font-family:serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth}
+@font-face {
+    font-family: "mft-fonts-ranchers";
+    src: url("fonts/Ranchers-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "mft-fonts-bitcountgsi";
+    src: url("fonts/BitcountGridSingleInk.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "mft-fonts-iceberg";
+    src: url("fonts/Iceberg-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "mft-fonts-iceland";
+    src: url("fonts/Iceland-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+html,body{height:100%;width:100%;margin:0;font-size:1rem;font-family:serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth;font-family:mft-fonts-iceland}
 body{background:#FFFAFA;overflow-x: hidden;}
 
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem}
 
 .header{background:#00BFFF;text-align:center;position:relative;overflow:visible}
-.header h4{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto}
+.header h3{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto;font-family: mft-fonts-bitcountgsi;}
 
 .menu-container {position: absolute;bottom:0.5rem;left:0;z-index: 1000;text-align: left}
 #menu-toggle {display: none;}
@@ -17,15 +42,14 @@ body{background:#FFFAFA;overflow-x: hidden;}
 .dropdown-menu a:hover {background: #CCCCCC;color: #FFFFFF;}
 #menu-toggle:checked + .menu-icon + .dropdown-menu {display: block;}
 
-.intro{background:#FFFAFA;text-align: center; color:#000000; font-family:serif;word-spacing:2px; line-height:1.5;font-weight:normal; 
+.intro{background:#FFFAFA;text-align: center; color:#000000;word-spacing:2px; line-height:1.5;font-weight:normal; 
   padding-left: 3rem;padding-right: 3rem;padding-top:0;padding-bottom:0;margin:0}
 .intro p{padding:0.5rem  0 0 0 ;margin:0;animation-duration: 3s;animation-name: slide-in;}
 @keyframes slide-in{from{translate: 0 0vw;scale:200% 1;} to {translate: 0 0;scale:100% 1;}}
 
 .categorycard{background:linear-gradient(to top, #00BFFF 75%, #00BFFF);display: flex;flex-direction: column;justify-content: center;
   text-align: center;flex:1;gap:0.25rem}
-.categorycard h4{text-align:center; background: linear-gradient(to bottom, #B23AEE 30%,  #00BFFF);
-background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#27408B; font-weight:bold;text-align: center;margin:0.125rem}
+.categorycard h4{text-align:center; padding:0.5rem 0 0 0;color:#27408B;text-align: center;margin:0.125rem;font-family: mft-fonts-iceberg;}
 
 .categoryproductscard {display: grid;grid-template-columns: repeat(2, 1fr);gap: 0.25rem;}
 .productcard{display:flex;flex-direction:column;gap:0rem;border:3px solid #FFD700;background:#FFFFFF;padding:0;}
@@ -39,11 +63,11 @@ background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#27408B; fon
 .hidden {display: none;}
 
 .orderbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#000000;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
+    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .orderbutton:hover{background: #82E0FF}
 
 .cancelbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#000000;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
+    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .cancelbutton:hover{background: #82E0FF}
 
 .ordersection {display: flex;flex-direction: column;align-items: center;}
@@ -68,7 +92,7 @@ background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#27408B; fon
 
 .viewbuttonsection{grid-column: span 2;align-items:center;background:#FFFFFF}
 .viewbutton{text-align:center ;border-radius: 0.25rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); 
-  color:#FFFFFF;padding:0.5rem 1rem 0.5rem 1rem; text-decoration: none;margin:1rem auto;border:none;outline:none;font-size:1rem;font-weight:bold}
+  color:#FFFFFF;padding:0.5rem 1rem 0.5rem 1rem; text-decoration: none;margin:1rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;font-family: mft-fonts-iceberg;}
 .viewbutton:hover{background: #82E0FF}
 
 .contact{background:#FFD700;text-align:center;padding:0;font-weight:bold;}
@@ -76,7 +100,7 @@ background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#27408B; fon
 .map-container{width:90%;height:50%;margin:0 auto;}
 
 footer{background:#FFFAFA;text-align:center; color:#FF8C00;padding-bottom:3rem;}
-.endsection p{background: linear-gradient(to bottom,#000000 10%, #000000);background-clip: text;color: transparent;font-size:small}
+.endsection p{background: linear-gradient(to bottom,#F4F4F4 10%, #0078A2);background-clip: text;color: transparent;font-size:small;font-family:mft-fonts-ranchers}
 
 .bottombar {position: fixed;bottom: 0;left: 0;width: 100%;height: 3.25rem;background: #FFD700;display: flex;justify-content: space-around;
   align-items: center;z-index: 1000;}

@@ -1,10 +1,35 @@
-html,body{height:100%;width:100%;margin:0;font-size:1rem;font-family:serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth}
+@font-face {
+    font-family: "mft-fonts-ranchers";
+    src: url("fonts/Ranchers-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "mft-fonts-bitcountgsi";
+    src: url("fonts/BitcountGridSingleInk.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "mft-fonts-iceberg";
+    src: url("fonts/Iceberg-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "mft-fonts-iceland";
+    src: url("fonts/Iceland-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+html,body{height:100%;width:100%;margin:0;font-size:1rem;font-family:serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth;font-family:mft-fonts-iceland}
 body{background:#FFFAFA}
 
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem}
 
 .header{background:#00BFFF;text-align:center;position:relative;overflow:visible}
-.header h4{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto}
+.header h3{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto;font-family: mft-fonts-bitcountgsi;}
 
 .menu-container {position: absolute;bottom:0.5rem;left:0;z-index: 1000;text-align: left;}
 #menu-toggle {display: none;}
@@ -28,22 +53,22 @@ body{background:#FFFAFA}
 .checkouttable table{border:1px solid #FFFFFF;overflow: hidden;width: 100%}
 .checkouttable th {border:1px solid #FFFFFF;color: #000000; padding: 0rem;text-align: center;font-weight: normal;white-space: nowrap;overflow: hidden;}
 
-.checkoutbuttons{width: 60%;margin:0 auto; display: flex;justify-content: space-between}
+.checkoutbuttons{width: 40%;margin:0 auto; display: flex;justify-content: space-between}
 .ordersummary{font-weight: bold}
 .backbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#FFFFFF;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
+    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .backbutton:hover{background: #82E0FF}
 
 .confirmbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#FFFFFF;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center}
+    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .confirmbutton:hover{background: #82E0FF}
 
 .removeBtn{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #FFFFFF, #CCCCCC); color:#008B8B;
     padding:0.25rem 0.5rem 0.25rem 0.5rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:0.75rem;font-weight:normal;
-    justify-content:center}
+    justify-content:center;font-family: mft-fonts-iceland;}
 
     footer{background:#FFFAFA;text-align:center; color:#FF8C00;padding-bottom:3rem;width: 100%}
-.endsection p{background: linear-gradient(to bottom,#000000 10%, #000000);background-clip: text;color: transparent;font-size:small;text-align: center;}
+.endsection p{background: linear-gradient(to bottom,#F4F4F4 10%, #0078A2);background-clip: text;color: transparent;font-size:small;text-align: center;font-family:mft-fonts-ranchers}
 
 @media(min-width:1000px){ 
 .checkoutcard{background:linear-gradient(to top, #B0C4DE 75%, #B0C4DE);display: flex;flex-direction: column;
