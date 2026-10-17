@@ -29,7 +29,7 @@ body{background:#FFFAFA}
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem}
 
 .header{background:#00BFFF;text-align:center;position:relative;overflow:visible}
-.header h3{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto;font-family: mft-fonts-bitcountgsi;}
+.header h3{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto;font-family: mft-fonts-iceland;}
 
 .menu-container {position: absolute;bottom:0.5rem;left:0;z-index: 1000;text-align: left;}
 #menu-toggle {display: none;}
@@ -49,18 +49,18 @@ body{background:#FFFAFA}
   background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#000000; font-weight:bold;text-align: center;margin:0.125rem}
 
 
-.checkouttable{background:#B0C4DE;margin: 0 auto;width: 100%;font-size: 0.75rem}
+.checkouttable{background:#B0C4DE;margin: 0 auto;width: 100%;font-size: 0.75rem;font-weight:bold}
 .checkouttable table{border:1px solid #FFFFFF;overflow: hidden;width: 100%}
-.checkouttable th {border:1px solid #FFFFFF;color: #000000; padding: 0rem;text-align: center;font-weight: normal;white-space: nowrap;overflow: hidden;}
+.checkouttable th {border:1px solid #FFFFFF;color: #000000; padding: 0rem;text-align: center;font-weight: bold;white-space: nowrap;overflow: hidden;}
 
-.checkoutbuttons{width: 40%;margin:0 auto; display: flex;justify-content: space-between}
+.checkoutbuttons{width: 30%;margin:0 auto; display: flex;justify-content: space-between}
 .ordersummary{font-weight: bold}
-.backbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#FFFFFF;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
+.backbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#000000;
+    padding:0.25rem 0.25rem 0.25rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .backbutton:hover{background: #82E0FF}
 
-.confirmbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#FFFFFF;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
+.confirmbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#000000;
+    padding:0.25rem 0.25rem 0.25rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .confirmbutton:hover{background: #82E0FF}
 
 .removeBtn{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #FFFFFF, #CCCCCC); color:#008B8B;

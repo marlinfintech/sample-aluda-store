@@ -29,7 +29,7 @@ body{background:#FFFAFA;overflow-x: hidden;}
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem}
 
 .header{background:#00BFFF;text-align:center;position:relative;overflow:visible}
-.header h3{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto;font-family: mft-fonts-bitcountgsi;}
+.header h3{background: linear-gradient(to bottom, #000000 50%,  #FFFFFF);background-clip: text;color: transparent;font-weight:bold;margin: 0 auto;font-family: mft-fonts-iceland;}
 
 .menu-container {position: absolute;bottom:0.5rem;left:0;z-index: 1000;text-align: left}
 #menu-toggle {display: none;}
@@ -63,11 +63,11 @@ body{background:#FFFAFA;overflow-x: hidden;}
 .hidden {display: none;}
 
 .orderbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#000000;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
+    padding:0.25rem 0.25rem 0.25rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .orderbutton:hover{background: #82E0FF}
 
 .cancelbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); color:#000000;
-    padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
+    padding:0.25rem 0.25rem 0.25rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .cancelbutton:hover{background: #82E0FF}
 
 .ordersection {display: flex;flex-direction: column;align-items: center;}
@@ -92,7 +92,7 @@ body{background:#FFFAFA;overflow-x: hidden;}
 
 .viewbuttonsection{grid-column: span 2;align-items:center;background:#FFFFFF}
 .viewbutton{text-align:center ;border-radius: 0.25rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); 
-  color:#FFFFFF;padding:0.5rem 1rem 0.5rem 1rem; text-decoration: none;margin:1rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;font-family: mft-fonts-iceberg;}
+  color:#000000;padding:0.5rem 0.25rem 0.5rem 0.25rem; text-decoration: none;margin:1rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;font-family: mft-fonts-iceberg;}
 .viewbutton:hover{background: #82E0FF}
 
 .contact{background:#FFD700;text-align:center;padding:0;font-weight:bold;}
@@ -118,7 +118,7 @@ footer{background:#FFFAFA;text-align:center; color:#FF8C00;padding-bottom:3rem;}
 
 .bottombar{display: flex;justify-content: space-evenly;}
 .bottombar button {text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #82E0FF, #00BFFF); 
-  color:#FFFFFF;padding:0.25rem 1rem 0.25rem 1rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1.2rem;font-weight:normal;}
+  color:#FFFFFF;padding:0.5rem 0.25rem 0.5rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1.2rem;font-weight:bold;}
 .bottombar button:hover{background: #82E0FF}
 a {color:#FFFFFF;text-decoration: none}
 
@@ -129,6 +129,8 @@ a {color:#FFFFFF;text-decoration: none}
 .cartitem {display: flex;justify-content: space-between;margin: 0.5rem 0;}
 
 .qtycontrols {display: flex;align-items: center;gap: 0.5rem;}
+
+.bottombar button{font-family: mft-fonts-iceland}
 
 @media(min-width:1000px){.categoryproductscard{ grid-template-columns:repeat(4,1fr);}}
 
