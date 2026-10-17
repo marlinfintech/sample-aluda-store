@@ -130,7 +130,7 @@ a {color:#FFFFFF;text-decoration: none}
 
 .qtycontrols {display: flex;align-items: center;gap: 0.5rem;}
 
-.bottombar button{font-family: mft-fonts-iceland}
+.bottombar button{font-family: sans-serif}
 
 @media(min-width:1000px){.categoryproductscard{ grid-template-columns:repeat(4,1fr);}}
 
