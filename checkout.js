@@ -192,7 +192,7 @@ async function confirmOrder() {
       .update({ total_amount: total })
       .eq("id", order.id);
 
-    alert("Your Order has been Successfully Placed! Sample Store E-Commerce Website by Marlin Fintech. Thank you!");
+    alert("Your Order has been Successfully Placed!");
 
     cart = {};
     localStorage.removeItem("cart");
