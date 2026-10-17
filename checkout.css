@@ -50,8 +50,8 @@ body{background:#FFFAFA}
 
 
 .checkouttable{background:#B0C4DE;margin: 0 auto;width: 100%;font-size: 0.75rem;font-weight:bold}
-.checkouttable table{border:2px solid #000000;overflow: hidden;width: 100%}
-.checkouttable th {border:2px solid #000000;color: #000000; padding: 0rem;text-align: center;font-weight: bold;white-space: nowrap;overflow: hidden;;font-family:sans-serif}
+.checkouttable table{border:2px solid #000000;overflow: hidden;width: 100%;font-family:sans-serif}
+.checkouttable th {border:2px solid #000000;color: #000000; padding: 0rem;text-align: center;font-weight: bold;white-space: nowrap;overflow: hidden;font-family:sans-serif}
 .checkouttabble tr{font-family:sans-serif}
 
 .checkoutbuttons{width: 30%;margin:0 auto; display: flex;justify-content: space-between}
@@ -79,8 +79,8 @@ body{background:#FFFAFA}
 
 
 .checkouttable{background:#B0C4DE;margin: 0 auto;width: 80%;font-size: 1rem;font-weight: bold}
-.checkouttable table{border:3px solid #FFFFFF;overflow: hidden;width: 100%;margin: 0 auto}
-.checkouttable th {border:3px solid #FFFFFF;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;
+.checkouttable table{border:3px solid #000000;overflow: hidden;width: 100%;margin: 0 auto}
+.checkouttable th {border:3px solid #000000;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;
   margin: 0 auto;white-space: nowrap;overflow: hidden;}
 
 .checkoutbuttons{width: 30%;margin:0 auto; display: flex;justify-content: space-between}
