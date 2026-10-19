@@ -29,7 +29,7 @@ body{background:#FFFAFA}
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem}
 
 .header{background:#00BFFF;text-align:center;position:relative;overflow:visible}
-.header h1{color: #FFFFFF;font-weight:bold;margin: 0 auto;font-family: mft-fonts-iceland;}
+.header h1{color: #FFFFFF;font-weight:bold;margin: 0 auto;font-family: mft-fonts-iceland;font-size:2.5rem}
 
 .menu-container {position: absolute;bottom:0.5rem;left:0;z-index: 1000;text-align: left;}
 #menu-toggle {display: none;}
