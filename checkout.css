@@ -83,6 +83,6 @@ body{background:#FFFAFA}
 .checkouttable th {border:3px solid #000000;color: #000000; padding: 0.5rem;text-align: center;font-weight: bold;
   margin: 0 auto;white-space: nowrap;overflow: hidden;}
 
-.checkoutbuttons{width: 30%;margin:0 auto; display: flex;justify-content: space-between}
+.checkoutbuttons{width: 20%;margin:0 auto; display: flex;justify-content: space-between}
 }
 

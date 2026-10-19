@@ -44,7 +44,7 @@ body{background:#FFFAFA;overflow-x: hidden;}
 
 .intro{background:#FFFAFA;text-align: center; color:#000000;word-spacing:2px; line-height:1.5;font-weight:normal; 
   padding-left: 3rem;padding-right: 3rem;padding-top:0;padding-bottom:0;margin:0}
-.intro p{padding:0.5rem  0 0 0 ;margin:0;animation-duration: 3s;animation-name: slide-in;}
+.intro p{font-size:1.325rem;padding:0.5rem  0 0 0 ;margin:0;animation-duration: 3s;animation-name: slide-in;}
 @keyframes slide-in{from{translate: 0 0vw;scale:200% 1;} to {translate: 0 0;scale:100% 1;}}
 
 .categorycard{background:linear-gradient(to top, #00BFFF 75%, #00BFFF);display: flex;flex-direction: column;justify-content: center;
@@ -55,7 +55,7 @@ body{background:#FFFAFA;overflow-x: hidden;}
 .productcard{display:flex;flex-direction:column;gap:0rem;border:3px solid #FFD700;background:#FFFFFF;padding:0;}
 
 .productdescription {background:#FFFAFA;width: 100%;word-break:break-word;overflow-wrap: break-word;line-height:1;flex-grow: 1;}
-.productdescription p{margin: 0.5rem 0}
+.productdescription p{margin: 0.5rem 0;font-size:1.325rem}
 
 .productimageandbutton {display: grid;}
 .productimage {width: 100%;height: 175px;overflow: hidden;padding: 0;margin:0}
@@ -76,9 +76,9 @@ body{background:#FFFAFA;overflow-x: hidden;}
 
 .after-order.hidden {display: none;}
 /* visual feedback */
-.addedtocartlabel {background: none;border: none;box-shadow: none;color: #008B00;padding: 0;margin: 0.5rem 0;cursor: default;}
+.addedtocartlabel {background: none;border: none;box-shadow: none;color: #008B00;padding: 0;margin: 0.5rem 0;cursor: default;font-size:1.325rem}
 
-.instocklabel {background: none;border: none;box-shadow: none;color: #000000; padding: 0;margin: 0.5rem 0;cursor: default;}
+.instocklabel {background: none;border: none;box-shadow: none;color: #000000; padding: 0;margin: 0.5rem 0;cursor: default;font-size:1.325rem}
 
 .orderplaced {display: none;}
 
@@ -137,3 +137,5 @@ a {color:#FFFFFF;text-decoration: none}
 @media(min-width:1000px){ .viewbuttonsection{grid-column: span 4}}
 
 @media(min-width:1000px){ .productimage {width: 100%;height: 250px;}  .menu-container2 {bottom:0.5rem;}}
+
+@media(min-width:1000px){.bottombar button{font-weight:normal}}
