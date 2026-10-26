@@ -58,11 +58,11 @@ body{background:#FFFAFA}
 .checkoutbuttons{width: 30%;margin:0 auto; display: flex;justify-content: space-between}
 .ordersummary{font-weight: bold;font-family:monospace; font-kerning: none;letter-spacing: 0.0025rem}
 .backbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #00BFFF,#0078A2); color:#FFFFFF;
-    padding:0.25rem 0.25rem 0.25rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:normal;justify-content:center;font-family: mft-fonts-iceland;}
+    padding:0.25rem 0.25rem 0.25rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .backbutton:hover{background: #00BFFF}
 
 .confirmbutton{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #00BFFF, #0078A2); color:#FFFFFF;
-    padding:0.25rem 0.25rem 0.25rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:normal;justify-content:center;font-family: mft-fonts-iceland;}
+    padding:0.25rem 0.25rem 0.25rem 0.25rem; text-decoration: none;margin:0.5rem auto;border:none;outline:none;font-size:1rem;font-weight:bold;justify-content:center;font-family: mft-fonts-iceland;}
 .confirmbutton:hover{background: #00BFFF}
 
 .removeBtn{text-align:center ;border-radius: 0.125rem; background: linear-gradient(to bottom, #FFFFFF, #CCCCCC); color:#008B00;
@@ -85,4 +85,6 @@ body{background:#FFFAFA}
 
 .checkoutbuttons{width: 20%;margin:0 auto; display: flex;justify-content: space-between}
 }
+
+@media(min-width:1000px){ .backbutton, .confirmbutton{font-weight:normal}}
 
