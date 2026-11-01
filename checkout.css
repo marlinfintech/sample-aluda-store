@@ -18,7 +18,7 @@
     font-style: normal;font-display: block;
 }
 
-html,body{height:100%;width:100%;margin:0;font-size:1rem;font-family:sans-serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth;font-family:mft-fonts-iceland}
+html,body{height:100%;width:100%;margin:0;font-size:1rem;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth;font-family:mft-fonts-iceland}
 body{background:#FFFAFA}
 
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem;width: 100%}
