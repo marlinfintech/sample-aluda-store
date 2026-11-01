@@ -46,7 +46,7 @@ body{background:#FFFAFA}
 .checkoutcard{background:linear-gradient(to top, #B0C4DE 75%, #B0C4DE);display: flex;flex-direction: column;
   justify-content: center;text-align: center;flex:1;gap:0.25rem;width: 100%;margin: 0 auto}
 .checkoutcard h3{text-align:center; background: linear-gradient(to bottom, #B23AEE 30%,  #00BFFF);
-  background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#000000; font-weight:bold;text-align: center;margin:0.125rem;font-family: mft-fonts-iceberg}
+  background-clip: text;color: transparent;padding:0.5rem 0 0 0;color:#000000; font-weight:bold;text-align: center;margin:0.125rem;font-family: mft-fonts-iceberg;-webkit-background-clip: text;}
 
 
 .checkouttable{background:#B0C4DE;margin: 0 auto;width: 100%;font-size: 0.75rem;font-weight:bold}
@@ -70,7 +70,7 @@ body{background:#FFFAFA}
     justify-content:center;font-family: mft-fonts-iceland;}
 
     footer{background:#FFFAFA;text-align:center; color:#FF8C00;padding-bottom:3rem;width: 100%}
-.endsection p{background: linear-gradient(to bottom,#F4F4F4 10%, #0078A2);background-clip: text;color: transparent;font-size:small;text-align: center;font-family:mft-fonts-ranchers}
+.endsection p{background: linear-gradient(to bottom,#F4F4F4 10%, #0078A2);background-clip: text;color: transparent;font-size:small;text-align: center;font-family:mft-fonts-ranchers;-webkit-background-clip: text;}
 
 @media(min-width:1000px){ .checkoutcard{background:linear-gradient(to top, #B0C4DE 75%, #B0C4DE);display: flex;flex-direction: column;
   justify-content: center;text-align: center;flex:1;gap:0.25rem;width: 80%;margin: 0 auto}
