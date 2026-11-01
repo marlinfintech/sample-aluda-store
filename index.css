@@ -2,28 +2,23 @@
     font-family: "mft-fonts-ranchers";
     src: url("fonts/Ranchers-Regular.ttf") format("truetype");
     font-weight: 400;
-    font-style: normal;
+    font-style: normal;font-display: block;
 }
-@font-face {
-    font-family: "mft-fonts-bitcountgsi";
-    src: url("fonts/BitcountGridSingleInk.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-}
+
 @font-face {
     font-family: "mft-fonts-iceberg";
     src: url("fonts/Iceberg-Regular.ttf") format("truetype");
     font-weight: 400;
-    font-style: normal;
+    font-style: normal;font-display: block;
 }
 @font-face {
     font-family: "mft-fonts-iceland";
     src: url("fonts/Iceland-Regular.ttf") format("truetype");
     font-weight: 400;
-    font-style: normal;
+    font-style: normal;font-display: block;
 }
 
-html,body{height:100%;width:100%;margin:0;font-size:1rem;font-family:serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth;font-family:mft-fonts-iceland}
+html,body{height:100%;width:100%;margin:0;font-size:1rem;font-family:sans-serif;word-spacing:0.3rem; line-height:1.5;scroll-behavior: smooth;font-family:mft-fonts-iceland}
 body{background:#FFFAFA;overflow-x: hidden;}
 
 .gridcontainer{display:flex;flex-direction:column;word-wrap:break-word;overflow:visible;gap:0.125rem;width: 100%}
